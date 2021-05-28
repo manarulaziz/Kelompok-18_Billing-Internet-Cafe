@@ -1,18 +1,52 @@
+# Tahap 1
+
+
+
+
 def menu_utama():
+    print("===== Selamat Datang =====")
     print("---------- MENU ----------")
     print("[1] Membership")
     print("[2] Transaksi")
     print("[3] Pengaturan Akun")
     print("[4] Keluar")
 
-    menu = int(input(">> "))
-    print("\n")
+def member():
+    print("Anda belum terdaftar sebagai member")
+    choice = input("Anda ingin mendaftar menjadi member? [Y/N]")
+    if choice == "Y":
+        print()
+    else:
+        menu_utama()
 
-if __name__ == '__main__':
-    menu_utama()
-
+def transaksi():
+    def billing():
+        print("1. Standar (Rp4000/jam)")
+        print("2. VIP (Rp6000/jam)")
+        print("3. VVIP (Rp9000/jam)")
+        print("4. Kembali")
     
-durasi = int(input("Input durasi (jam): "))
+    print
+    billing()
+    while 3:
+        pilih3 = int(input("Silakan pilih: "))
+
+        if pilih3 == 1:
+            standar = 4000
+            durasi = int(input("Input durasi (jam): "))
+            net = durasi * standar
+        elif pilih3 == 2:
+            vip = 6000
+            durasi = int(input("Input durasi (jam): "))
+            net = durasi * vip
+        elif pilih3 == 3:
+            vvip = 4000
+            durasi = int(input("Input durasi (jam): "))
+            net = durasi * vvip
+        elif pilih3 == 4:
+            menu_utama()
+
+# fnb dimasukin ke menu billing terus ditotal
 
 
 def fnb():
@@ -68,3 +102,54 @@ def fnb():
                     break
     jumlah_pembelian = int(input("Masukan Jumlah Pembelian : "))
 
+def akun(): # tahap 2
+    print("")
+
+print("===== Internet Billing Cafe =====")
+print
+menu_awal()
+
+while 1:
+    pilih1 = int(input("Silakan pilih \n>> "))
+
+    if pilih1 == 1:
+        masuk()
+    elif pilih1 == 2:
+        daftar()
+    elif pilih1 == 3:
+        print("\n"*100)
+        break
+    else:
+        print("Maaf pilihan yang dimasukkan tidak terdaftar")
+        print("Coba lagi [Y/N] ?")
+        coba = input().upper()
+        if coba == "Y":
+            menu_awal()
+        else:
+            print("\n")*100
+            break
+
+print("===== Internet Billing Cafe =====")
+print
+menu_utama()
+
+while 2:
+    pilih2 = int(input("Silakan pilih: \n>>"))
+
+    if pilih2 == 1:
+        member()
+    elif pilih2 == 2:
+        transaksi()
+    elif pilih2 == 3:
+        akun()
+    elif pilih2 == 4:
+        menu_awal()
+    elif pilih2 == 5:
+        print("Maaf pilihan yang dimasukkan tidak terdaftar")
+        print("Coba lagi [Y/N] ?")
+        coba = input().upper()
+        if coba == "Y":
+            menu_utama()
+        else:
+            print("\n")*100
+            break
