@@ -1,7 +1,24 @@
 # Tahap 1
+def menu_awal():
+    print("[1] Login")
+    print("[2] Daftar")
+    print("[3] Keluar")
 
+def masuk():
+    print("---------- Login ----------")
+    print("\nSilakan Masukkan Akun Anda yang telah terdaftar ")
+    email_login = input("Email: ")
+    password_login = input("Password: ")
 
-
+def daftar():
+    print("---------- Daftar ----------")
+    print("\nSilakan Mengisi Data yang Diperlukan")
+    nama = input("Nama: ")
+    email_daftar = input("Email: ")
+    password_daftar = input("Password:")
+    print("Terima kasih, Data Anda Sudah Terdaftar")
+    print("Silakan Login di Menu Awal")
+    menu_awal()
 
 def menu_utama():
     print("===== Selamat Datang =====")
