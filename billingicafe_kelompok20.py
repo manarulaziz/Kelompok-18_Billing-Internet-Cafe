@@ -1,27 +1,63 @@
 # Tahap 1
+data_nama = ["aji"]
+data_email = ["aji@gmail.com"]
+data_password = ["1234"]
+keluar = False
+
+
 def menu_awal():
     print("[1] Login")
     print("[2] Daftar")
     print("[3] Keluar")
+
+def daftar():
+    print("---------- Daftar ----------")
+    print("\nSilakan Mengisi Data yang Diperlukan")
+    nama = input("Masukkan Nama Anda \n>> ")
+    data_nama.append(nama)
+
+    email = input("Masukkan email Anda \n>> ")
+    harus_ada1 = "@gmail.com"
+
+    while not (harus_ada1 in email):
+        print("Masukkan email Google yang benar!")
+        email = input("\nMasukkan email Google Anda \n>> ")
+    data_email.append(email)
+    
+    password = input("Masukkan Password Anda \n>> ")
+    while not (len(password) >= 8 and password.isalnum()):
+        print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
+        password = input("\nMasukkan password Anda \n>> ")
+    data_password.append(password)
+
+    print("Terima kasih, Data Anda Sudah Terdaftar")
+    print("Silakan Login di Menu Awal")
+    menu_awal()
+
 
 def masuk():
     print("---------- Login ----------")
     print("\nSilakan Masukkan Akun Anda yang telah terdaftar ")
     email_login = input("Email: ")
     password_login = input("Password: ")
+    validasi = False
+    while not validasi:
+        for i in range(len(data_email)):
+            if (email_login == data_email[i]) and (password_login == data_password[i]):
+                validasi = True
+                print("Login berhasil! \n")
+                return data_nama[i]
+        
+        if validasi:
+            break
+        else:
+            print("Email atau Password salah!")
+            email_login = input("Email: ")
+            password_login = input("Password: ")
 
-def daftar():
-    print("---------- Daftar ----------")
-    print("\nSilakan Mengisi Data yang Diperlukan")
-    nama = input("Nama: ")
-    email_daftar = input("Email: ")
-    password_daftar = input("Password:")
-    print("Terima kasih, Data Anda Sudah Terdaftar")
-    print("Silakan Login di Menu Awal")
-    menu_awal()
 
-def menu_utama():
-    print("===== Selamat Datang =====")
+def menu_utama(name):
+    print("===== Selamat Datang", nama, " =====")
     print("---------- MENU ----------")
     print("[1] Membership")
     print("[2] Transaksi")
@@ -34,7 +70,7 @@ def member():
     if choice == "Y":
         print()
     else:
-        menu_utama()
+        menu_utama(nama)
 
 def transaksi():
     def billing():
@@ -123,18 +159,20 @@ def akun(): # tahap 2
     print("")
 
 print("===== Internet Billing Cafe =====")
-print
+print()
 menu_awal()
 
 while 1:
     pilih1 = int(input("Silakan pilih \n>> "))
 
     if pilih1 == 1:
-        masuk()
+        nama = masuk()
+        break
     elif pilih1 == 2:
         daftar()
     elif pilih1 == 3:
         print("\n"*100)
+        keluar = True
         break
     else:
         print("Maaf pilihan yang dimasukkan tidak terdaftar")
@@ -146,27 +184,32 @@ while 1:
             print("\n")*100
             break
 
-print("===== Internet Billing Cafe =====")
-print
-menu_utama()
+if keluar:
+    print("Terima kasih telah menggunakan program ini!")
 
-while 2:
-    pilih2 = int(input("Silakan pilih: \n>>"))
+else:
+    print("===== Internet Billing Cafe =====")
+    print()
+    menu_utama(nama)
 
-    if pilih2 == 1:
-        member()
-    elif pilih2 == 2:
-        transaksi()
-    elif pilih2 == 3:
-        akun()
-    elif pilih2 == 4:
-        menu_awal()
-    elif pilih2 == 5:
-        print("Maaf pilihan yang dimasukkan tidak terdaftar")
-        print("Coba lagi [Y/N] ?")
-        coba = input().upper()
-        if coba == "Y":
-            menu_utama()
-        else:
-            print("\n")*100
-            break
+    while 2:
+        pilih2 = int(input("Silakan pilih: \n>>"))
+
+        if pilih2 == 1:
+            member()
+        elif pilih2 == 2:
+            transaksi()
+        elif pilih2 == 3:
+            akun()
+        elif pilih2 == 4:
+            menu_awal()
+        elif pilih2 == 5:
+            print("Maaf pilihan yang dimasukkan tidak terdaftar")
+            print("Coba lagi [Y/N] ?")
+            coba = input().upper()
+            if coba == "Y":
+                menu_utama()
+            else:
+                print("\n")*100
+                break
+
