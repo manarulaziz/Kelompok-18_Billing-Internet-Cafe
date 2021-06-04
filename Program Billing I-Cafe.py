@@ -1,24 +1,32 @@
-# Tahap 1
-data_nama = ["aji"]
-data_email = ["aji@gmail.com"]
-data_password = ["1234"]
+# Variabel Global
+## Variabel Menu Awal
+data_nama = ["Test Login"]
+data_email = ["testlogin@gmail.com"]
+data_password = ["test12345"]
+## Variabel Membership
+data_namalengkap = []
+data_notelpon = []
+data_kodeunik = []
+## Variabel Loop
 keluar = False
 
 
+# Menu Awal
 def menu_awal():
     print("[1] Login")
     print("[2] Daftar")
     print("[3] Keluar")
 
+# Menu Registrasi
 def daftar():
     print("---------- Daftar ----------")
     print("\nSilakan Mengisi Data yang Diperlukan")
+    
     nama = input("Masukkan Nama Anda \n>> ")
     data_nama.append(nama)
 
     email = input("Masukkan email Anda \n>> ")
     harus_ada1 = "@gmail.com"
-
     while not (harus_ada1 in email):
         print("Masukkan email Google yang benar!")
         email = input("\nMasukkan email Google Anda \n>> ")
@@ -34,11 +42,13 @@ def daftar():
     print("Silakan Login di Menu Awal")
     menu_awal()
 
-
+# Menu Login
 def masuk():
     print("---------- Login ----------")
     print("\nSilakan Masukkan Akun Anda yang telah terdaftar ")
+    
     email_login = input("Email: ")
+    
     password_login = input("Password: ")
     validasi = False
     while not validasi:
@@ -47,7 +57,6 @@ def masuk():
                 validasi = True
                 print("Login berhasil! \n")
                 return data_nama[i]
-        
         if validasi:
             break
         else:
@@ -55,7 +64,7 @@ def masuk():
             email_login = input("Email: ")
             password_login = input("Password: ")
 
-
+# Menu Utama setelah Login
 def menu_utama(name):
     print("===== Selamat Datang", nama, " =====")
     print("---------- MENU ----------")
@@ -64,16 +73,71 @@ def menu_utama(name):
     print("[3] Pengaturan Akun")
     print("[4] Keluar")
 
+# Menu Membership
 def member():
-    print("Anda belum terdaftar sebagai member")
-    choice = input("Anda ingin mendaftar menjadi member? [Y/N]")
-    if choice == "Y":
-        print()
-    else:
-        menu_utama(nama)
 
+    def riwayat():
+        print("Bentar dulu")
+    
+    def daftar_member():
+        print("Silakan masukkan data diri Anda!")
+        nama_member = input("Nama Lengkap:\n>> ")
+        data_namalengkap.append(nama_member)
+
+        notelpon = int(input("Nomor Telepon:\n>> "))
+        data_notelpon.append(notelpon)
+
+        kode_unik = int(input("Kode Unik:\n>> "))
+        data_kodeunik.append(kode_unik)
+
+
+    def cek_member():
+        cek_kode = input("Masukkan kode unik membership Anda:\n>> ")
+        validasi = False
+        while not validasi:
+            for i in range(len(data_kodeunik)):
+                if (cek_kode == data_kodeunik[i]):
+                    validasi = True
+                    print("Anda Mempunyai Membership!\n")
+                    print("----- Membership Menu ------")
+                    print("[1.] Cek Riwayat Transaksi")
+                    print("[2.] Kembali")
+                    riwayat_transaksi = int(input("Pilih Menu\n>> "))
+                    if riwayat_transaksi == 1:
+                        riwayat()
+                    elif riwayat_transaksi == 2:
+                        menu_utama()
+        
+            if validasi:
+                break
+            else:
+                print("Kode Unik salah!")
+                cek_kode = input("Kode Unik:\n>> ")
+                
+                print("\nAtau apakah Anda belum medaftar sebagai member?")
+                choice = input("Anda ingin mendaftar menjadi member? [Y/N]")
+                print("Pendaftaran member dikenakan biaya Rp30.000")
+                if choice == "Y":
+                    daftar_member()
+                else:
+                    menu_utama()
+
+
+    print("Apakah Anda ingin Cek Membership? [Y/N]")
+    ini = input().upper()
+    if ini == "Y":
+        cek_member()
+    else:
+        menu_utama()
+
+
+        
+    
+
+# Menu Transaksi
 def transaksi():
     def billing():
+        print("Silakan pilih paket yang Anda inginkan\n>>")
         print("1. Standar (Rp4000/jam)")
         print("2. VIP (Rp6000/jam)")
         print("3. VVIP (Rp9000/jam)")
@@ -82,7 +146,7 @@ def transaksi():
     print
     billing()
     while 3:
-        pilih3 = int(input("Silakan pilih: "))
+        pilih3 = int(input("Silakan pilih\n>> "))
 
         if pilih3 == 1:
             standar = 4000
@@ -158,12 +222,13 @@ def fnb():
 def akun(): # tahap 2
     print("")
 
+# Perintah Run
 print("===== Internet Billing Cafe =====")
 print()
 menu_awal()
 
 while 1:
-    pilih1 = int(input("Silakan pilih \n>> "))
+    pilih1 = int(input("Silakan pilih\n>> "))
 
     if pilih1 == 1:
         nama = masuk()
@@ -193,7 +258,7 @@ else:
     menu_utama(nama)
 
     while 2:
-        pilih2 = int(input("Silakan pilih: \n>>"))
+        pilih2 = int(input("Silakan pilih\n>> "))
 
         if pilih2 == 1:
             member()
