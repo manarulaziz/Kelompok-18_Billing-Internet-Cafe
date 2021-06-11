@@ -6,7 +6,7 @@ data_password = ["test12345"]
 ## Variabel Membership
 data_namalengkap = []
 data_notelpon = []
-data_kodeunik = []
+data_kodeunik = ["130402"]
 ## Variabel Loop
 keluar = False
 
@@ -106,7 +106,7 @@ def member():
                     if riwayat_transaksi == 1:
                         riwayat()
                     elif riwayat_transaksi == 2:
-                        menu_utama()
+                        menu_utama(nama)
         
             if validasi:
                 break
@@ -114,24 +114,32 @@ def member():
                 print("Kode Unik salah!")
                 cek_kode = input("Kode Unik:\n>> ")
                 
-                print("\nAtau apakah Anda belum medaftar sebagai member?")
+                print("\nAtau apakah Anda belum mendaftar sebagai member?")
                 choice = input("Anda ingin mendaftar menjadi member? [Y/N]")
                 print("Pendaftaran member dikenakan biaya Rp30.000")
                 if choice == "Y":
                     daftar_member()
                 else:
-                    menu_utama()
+                    menu_utama(nama)
 
 
-    print("Apakah Anda ingin Cek Membership? [Y/N]")
-    ini = input().upper()
-    if ini == "Y":
-        cek_member()
-    else:
-        menu_utama()
-
-
-        
+    print("Apakah Anda mempunyai Membership? [Y/N]")
+    itu = input().upper()
+    if itu == "Y":
+        print("Apakah Anda ingin Cek Membership? [Y/N]")
+        ini = input().upper()
+        if ini == "Y":
+            cek_member()
+        elif ini == "N":
+            menu_utama(nama)  
+    elif itu == "N":
+        print("Apakah Anda ingin mendaftar Membership? [Y/N]")
+        print("Pendaftaran member dikenakan biaya Rp30.000")
+        iniitu = input().upper()
+        if iniitu == "Y":
+            daftar_member()
+        elif iniitu == "N":
+            menu_utama(nama)
     
 
 # Menu Transaksi
@@ -219,8 +227,44 @@ def fnb():
                     break
     jumlah_pembelian = int(input("Masukan Jumlah Pembelian : "))
 
-def akun(): # tahap 2
-    print("")
+def akun(): # cek lagi logikanya belum masuk
+
+    def ubahpass():
+        pass_lama = input("Masukkan Password Lama Akun Anda\n>> ")
+        if pass_lama is data_password:
+            pass_baru = input("Masukkan Password Baru\n>> ")
+            while not (len(pass_baru) >= 8 and pass_baru.isalnum()):
+                print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
+                pass_baru = input("\nMasukkan password Anda \n>> ")
+        data_password[0] = pass_baru
+    def ubahemail():
+        email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
+        if email_lama is data_email:
+            email_baru = input("Masukkan Email Baru\n>> ")
+            harus_ada1 = "@gmail.com"
+            while not (harus_ada1 in email):
+                print("Masukkan email Google yang benar!")
+                email = input("\nMasukkan email Google Anda \n>> ")
+        data_email[0] = email_baru
+    def hapusakun():
+        print("")
+
+    print("---------- PENGATURAN AKUN ----------")
+    print("[1] Ubah Kata Sandi")
+    print("[2] Ubah Email")
+    print("[3] Hapus Akun")
+    print("[4] Keluar")
+
+    pilih4 = int(input("Silakan pilih\n>> "))
+    while 4:
+        if pilih4 == 1:
+            ubahpass()
+        elif pilih4 == 2:
+            ubahemail()
+        elif pilih4 == 3:
+            hapusakun()
+        elif pilih4 == 4:
+            menu_utama(nama)
 
 # Perintah Run
 print("===== Internet Billing Cafe =====")
@@ -277,4 +321,3 @@ else:
             else:
                 print("\n")*100
                 break
-
