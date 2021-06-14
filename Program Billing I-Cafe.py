@@ -338,3 +338,18 @@ else:
             else:
                 print("\n")*100
                 break
+
+#nota
+	nota = [
+		["Nama", data[email]['Nama']],
+		["Jenis Billing", newT['Jenis Billing']],
+		["Durasi Billing",str(newT["Durasi Billing"]) + " jam"],
+		["Membership", data[email]['isMember']],
+		['Biaya', formatRupiah(biayaRaw)],
+		['Diskon Opening', formatRupiah(potongan_1)],
+		['Diskon Night Time', formatRupiah(potongan_2)]
+	]
+
+
+
+
