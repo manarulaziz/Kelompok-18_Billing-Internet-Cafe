@@ -10,6 +10,30 @@ data_kodeunik = ["130402"]
 ## Variabel Loop
 keluar = False
 
+fnb = [
+    ["Roti",5000],
+    ["Mi Goreng",5000],
+    ["Mi Kuah",5000],
+    ["Nugget",7000],
+    ["Kentang",6000],
+    ["Es Teh", 3000],
+    ["Es Jeruk", 3000],
+    ["Susu", 5000]
+]
+
+dictFnb = {
+	"Roti":5000,
+	"Mi Goreng":5000,
+	"Mi Kuah":5000,
+	"Nugget":7000,
+	"Kentang":6000,
+    "Es Teh": 3000,
+    "Es Jeruk": 3000,
+    "Susu": 5000
+}
+
+formatRupiah = lambda angka : "Rp {:0,.0f}".format(angka)
+
 
 # Menu Awal
 def menu_awal():
@@ -140,7 +164,56 @@ def member():
             daftar_member()
         elif iniitu == "N":
             menu_utama(nama)
-    
+
+
+def inifnb():
+    pesanan = dict()
+    while True:
+        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [y/t] ")
+        if pilihan == 'y':
+            isPesan = 'y'
+            while True:
+                if isPesan == 'y':
+                    print("Daftar Harga")
+                    for i, j in enumerate(fnb):
+                        print("[{}] {:<9s} : Rp{},00".format(i + 1, j[0], j[1]))
+                    print()
+                    try:
+                        pilihan_2 = int(input("Silahkan pilih (angka) : "))
+                        if pilihan_2 < 1:
+                            print("Angka tidak valid.")
+                            continue
+                        print()
+                        pilihan_3 = int(input("Jumlah : "))
+                        if pilihan_3 < 1:
+                            print("Angka tidak valid")
+                    except ValueError:
+                        print("Angka tidak valid.")
+                        continue
+                    except IndexError:
+                        print("Pilihan tidak valid.")
+                        continue
+                    # cek sebelumnya jika emang udah pesen (nambah quantity)
+                    if fnb[pilihan_2 - 1][0] in pesanan:
+                        pesanan[fnb[pilihan_2 - 1][0]] += pilihan_3
+                    else:
+                        pesanan[fnb[pilihan_2 - 1][0]] = pilihan_3
+                    print("{} sebanyak {} berhasil ditambahkan dengan total harga Rp {:0,.0f}".format(
+                        fnb[pilihan_2 - 1][0], pilihan_3,
+                        pilihan_3 * fnb[pilihan_2 - 1][1]))
+
+                elif isPesan == 't':
+                    break
+                else:
+                    print("Input tidak valid.")
+                isPesan = input("Apakah ada pesanan lagi ? [y/t] ")
+            break
+        elif pilihan == 't':
+            break
+        else:
+            print("Input salah.")
+    return pesanan
+
 
 # Menu Transaksi
 def transaksi():
@@ -150,7 +223,7 @@ def transaksi():
         print("2. VIP (Rp6000/jam)")
         print("3. VVIP (Rp9000/jam)")
         print("4. Kembali")
-    
+
     print
     billing()
     while 3:
@@ -170,62 +243,6 @@ def transaksi():
             net = durasi * vvip
         elif pilih3 == 4:
             menu_utama()
-
-# fnb dimasukin ke menu billing terus ditotal
-
-
-def fnb():
-    print("Food and Beverage")
-    print("[1] Roti      : Rp5.000,00")
-    print("[2] Mi Goreng : Rp5.000,00")
-    print("[3] Mi Kuah   : Rp5.000,00")
-    print("[4] Nugget    : Rp7.000,00")
-    print("[5] Kentang   : Rp8.000,00")
-    print("[6] Es Teh    : Rp3.000,00")
-    print("[7] Es Jeruk  : Rp3.000,00")
-    print("[8] Susu      : Rp5.000,00")
-
-    fnb = int(input("Pilih satu >> "))
-    if fnb == 1:
-        harga = 5000
-    elif fnb == 2:
-        harga = 5000
-    elif fnb == 3:
-        harga = 5000
-    elif fnb == 4:
-        harga = 7000
-    elif fnb == 5:
-        harga = 8000
-    elif fnb == 6:
-        harga = 3000
-    elif fnb == 7:
-        harga = 3000
-    elif fnb == 8:
-        harga = 3000
-    else:
-        while True:
-            print("=====Menu Tidak Tersedia,Silahkan Pilih Menu Lainnya!!=====")
-            fnb = int(input("Masukan menu pesanan (Nomer Menu) : "))
-            if fnb == 1 or fnb == 2 or fnb == 3 or fnb == 4 or fnb == 5 or fnb == 6 or fnb == 7 or fnb == 8:
-                if fnb == 1:
-                    harga = 5000
-                elif fnb == 2:
-                    harga = 5000
-                elif fnb == 3:
-                    harga = 5000
-                elif fnb == 4:
-                    harga = 7000
-                elif fnb == 5:
-                    harga = 8000
-                elif fnb == 6:
-                    harga = 3000
-                elif fnb == 7:
-                    harga = 3000
-                elif fnb == 8:
-                    harga = 3000
-                else:
-                    break
-    jumlah_pembelian = int(input("Masukan Jumlah Pembelian : "))
 
 def akun(): # cek lagi logikanya belum masuk
 
