@@ -23,19 +23,6 @@ fnb = [
     ["Susu", 5000]
 ]
 
-dictFnb = {
-	"Roti":5000,
-	"Mi Goreng":5000,
-	"Mi Kuah":5000,
-	"Nugget":7000,
-	"Kentang":6000,
-    "Es Teh": 3000,
-    "Es Jeruk": 3000,
-    "Susu": 5000
-}
-
-formatRupiah = lambda angka : "Rp {:0,.0f}".format(angka)
-
 
 # Menu Awal
 def menu_awal():
@@ -251,27 +238,40 @@ def transaksi():
             menu_utama()
 
 
-def akun(): # cek lagi logikanya belum masuk
+def akun():
 
     def ubahpass():
         pass_lama = input("Masukkan Password Lama Akun Anda\n>> ")
-        if pass_lama is data_password:
+        if pass_lama in data_password:
             pass_baru = input("Masukkan Password Baru\n>> ")
             while not (len(pass_baru) >= 8 and pass_baru.isalnum()):
                 print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
                 pass_baru = input("\nMasukkan password Anda \n>> ")
-        data_password[0] = pass_baru
+        data_password[user_id] = pass_baru
+        print("Password akun Anda sudah diubah!")
+        # masih bellum ada keterangan untuk balik ke menu utama
+
     def ubahemail():
         email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
-        if email_lama is data_email:
+        if email_lama in data_email:
             email_baru = input("Masukkan Email Baru\n>> ")
             harus_ada1 = "@gmail.com"
-            while not (harus_ada1 in email):
+            while not (harus_ada1 in email_baru):
                 print("Masukkan email Google yang benar!")
-                email = input("\nMasukkan email Google Anda \n>> ")
-        data_email[0] = email_baru
+                email_baru = input("\nMasukkan email Google Anda \n>> ")
+        data_email[user_id] = email_baru
+        print("Email akun Anda sudah diubah!")
+        # masih bellum ada keterangan untuk balik ke menu utama
+
     def hapusakun():
-        print("")
+        data_email.pop(user_id)
+        data_password.pop(user_id)
+        data_nama.pop(user_id)
+        data_namalengkap.pop(user_id)
+        data_notelpon.pop(user_id)
+        data_kodeunik.pop(user_id)
+        data_riwayat.pop(user_id)
+        # masih belum ada keterangan hapus akun dari programnya jadi langsung ke menu utama lagi
 
     print("---------- PENGATURAN AKUN ----------")
     print("[1] Ubah Kata Sandi")
