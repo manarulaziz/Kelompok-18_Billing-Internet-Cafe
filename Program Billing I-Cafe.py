@@ -3,10 +3,12 @@
 data_nama = ["Test Login"]
 data_email = ["testlogin@gmail.com"]
 data_password = ["test12345"]
+data_riwayat = [[]]
+user_id = 0
 ## Variabel Membership
-data_namalengkap = []
-data_notelpon = []
-data_kodeunik = ["130402"]
+data_namalengkap = ["Aji Manarul"]
+data_notelpon = ["08123456789"]
+data_kodeunik = ["12345"]
 ## Variabel Loop
 keluar = False
 
@@ -61,6 +63,10 @@ def daftar():
         print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
         password = input("\nMasukkan password Anda \n>> ")
     data_password.append(password)
+    data_riwayat.append([])
+    data_namalengkap.append("")
+    data_notelpon.append("")
+    data_kodeunik.append("")
 
     print("Terima kasih, Data Anda Sudah Terdaftar")
     print("Silakan Login di Menu Awal")
@@ -80,6 +86,7 @@ def masuk():
             if (email_login == data_email[i]) and (password_login == data_password[i]):
                 validasi = True
                 print("Login berhasil! \n")
+                user_id = i
                 return data_nama[i]
         if validasi:
             break
@@ -101,18 +108,24 @@ def menu_utama(name):
 def member():
 
     def riwayat():
-        print("Bentar dulu")
+        total = 0
+        for i in range(len(data_riwayat[user_id])):
+            print("[{}] {:<9s} : Rp{},00".format(i+1, data_riwayat[user_id][i][0], data_riwayat[user_id][i][1]))
+            total += data_riwayat[user_id][i][1]
+
+        print(f"Total harga: {total}")
+        # masih belum ada fungsi untuk balik ke menu utama secara baik
     
     def daftar_member():
         print("Silakan masukkan data diri Anda!")
         nama_member = input("Nama Lengkap:\n>> ")
-        data_namalengkap.append(nama_member)
+        data_namalengkap[user_id](nama_member) # masih error
 
         notelpon = int(input("Nomor Telepon:\n>> "))
-        data_notelpon.append(notelpon)
+        data_notelpon[user_id](notelpon) # masih error
 
         kode_unik = int(input("Kode Unik:\n>> "))
-        data_kodeunik.append(kode_unik)
+        data_kodeunik[user_id](kode_unik) # masih error
 
 
     def cek_member():
