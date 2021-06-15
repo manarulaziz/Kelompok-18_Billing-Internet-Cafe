@@ -180,9 +180,8 @@ def member():
 
 
 def inifnb():
-    pesanan = dict()
     while True:
-        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [y/t] ")
+        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [y/n] ")
         if pilihan == 'y':
             isPesan = 'y'
             while True:
@@ -190,42 +189,28 @@ def inifnb():
                     print("Daftar Harga")
                     for i, j in enumerate(fnb):
                         print("[{}] {:<9s} : Rp{},00".format(i + 1, j[0], j[1]))
-                    print()
-                    try:
-                        pilihan_2 = int(input("Silahkan pilih (angka) : "))
-                        if pilihan_2 < 1:
-                            print("Angka tidak valid.")
-                            continue
-                        print()
-                        pilihan_3 = int(input("Jumlah : "))
-                        if pilihan_3 < 1:
-                            print("Angka tidak valid")
-                    except ValueError:
-                        print("Angka tidak valid.")
-                        continue
-                    except IndexError:
-                        print("Pilihan tidak valid.")
-                        continue
-                    # cek sebelumnya jika emang udah pesen (nambah quantity)
-                    if fnb[pilihan_2 - 1][0] in pesanan:
-                        pesanan[fnb[pilihan_2 - 1][0]] += pilihan_3
-                    else:
-                        pesanan[fnb[pilihan_2 - 1][0]] = pilihan_3
-                    print("{} sebanyak {} berhasil ditambahkan dengan total harga Rp {:0,.0f}".format(
-                        fnb[pilihan_2 - 1][0], pilihan_3,
-                        pilihan_3 * fnb[pilihan_2 - 1][1]))
 
-                elif isPesan == 't':
+                    input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
+                    while (input_menu < 1 or input_menu > 8):
+                        print("Input tidak valid")
+                        input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
+                        #
+
+                    data_riwayat[user_id].append([fnb[input_menu][0], fnb[input_menu][1]])
+                    isPesan = input("Apakah anda ingin memesan makanan/minuman yang lain? [y/n] ")
+                    # masih error saat memilih menu yang nomor 8
+                elif isPesan == 'n':
                     break
                 else:
                     print("Input tidak valid.")
-                isPesan = input("Apakah ada pesanan lagi ? [y/t] ")
-            break
-        elif pilihan == 't':
-            break
-        else:
-            print("Input salah.")
-    return pesanan
+
+                break
+                elif pilihan == 'n':
+                # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
+                break
+            else:
+                print("Input salah.")
+                break
 
 
 # Menu Transaksi
@@ -256,6 +241,7 @@ def transaksi():
             net = durasi * vvip
         elif pilih3 == 4:
             menu_utama()
+
 
 def akun(): # cek lagi logikanya belum masuk
 
