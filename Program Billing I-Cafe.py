@@ -204,13 +204,13 @@ def inifnb():
                 else:
                     print("Input tidak valid.")
 
-                break
-                elif pilihan == 'n':
-                # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
-                break
-            else:
-                print("Input salah.")
-                break
+            break
+        elif pilihan == 'n':
+            # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
+            break
+        else:
+            print("Input salah.")
+            break
 
 
 # Menu Transaksi
@@ -231,6 +231,9 @@ def transaksi():
             standar = 4000
             durasi = int(input("Input durasi (jam): "))
             net = durasi * standar
+            data_riwayat[user_id].append(["Standar", net])
+            inifnb()
+            break
         elif pilih3 == 2:
             vip = 6000
             durasi = int(input("Input durasi (jam): "))
