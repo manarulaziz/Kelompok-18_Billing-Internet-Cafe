@@ -175,7 +175,7 @@ def inifnb():
                 if isPesan == 'y':
                     print("Daftar Harga")
                     for i, j in enumerate(fnb):
-                        print("[{}] {:<9s} : Rp{},00".format(i + 1, j[0], j[1]))
+                        print("[{}] {:<9s} : Rp{},00".format(i, j[0], j[1]))
 
                     input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
                     while (input_menu < 1 or input_menu > 8):
