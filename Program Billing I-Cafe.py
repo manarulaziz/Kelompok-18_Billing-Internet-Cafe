@@ -194,7 +194,6 @@ def inifnb():
                     while (input_menu < 1 or input_menu > 8):
                         print("Input tidak valid")
                         input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
-                        #
 
                     data_riwayat[user_id].append([fnb[input_menu][0], fnb[input_menu][1]])
                     isPesan = input("Apakah anda ingin memesan makanan/minuman yang lain? [y/n] ")
@@ -238,10 +237,16 @@ def transaksi():
             vip = 6000
             durasi = int(input("Input durasi (jam): "))
             net = durasi * vip
+            data_riwayat[user_id].append(["VIP", net])
+            inifnb()
+            break
         elif pilih3 == 3:
             vvip = 4000
             durasi = int(input("Input durasi (jam): "))
             net = durasi * vvip
+            data_riwayat[user_id].append(["VVIP", net])
+            inifnb()
+            break
         elif pilih3 == 4:
             menu_utama()
 
