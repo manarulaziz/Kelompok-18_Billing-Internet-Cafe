@@ -256,7 +256,7 @@ def transaksi():
 
 def inifnb():
     while True:
-        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [Y/N] ").upper()
+        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [y/n] ").upper()
         if pilihan == 'Y':
             isPesan = 'Y'
             while True:
@@ -271,14 +271,18 @@ def inifnb():
                         input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
 
                     data_riwayat[user_id].append([fnb[input_menu][0], fnb[input_menu][1]])
-                    isPesan = input("Apakah anda ingin memesan makanan/minuman yang lain? [y/n] ")
-                elif isPesan == 'n':
-                    break
+                    isPesan = input("Apakah anda ingin memesan makanan/minuman yang lain? [Y/N] ").upper()
+                    # masih error saat memilih menu yang nomor 8
+                elif isPesan == 'N':
+                    print(riwayat())
+                    menu_utama(nama)
                 else:
                     print("Input tidak valid.")
+                    menu_utama(nama)
 
             break
         elif pilihan == 'N':
+            # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
             print(riwayat())
             menu_utama(nama)
         else:
@@ -295,7 +299,7 @@ def ubahpass():
             pass_baru = input("\nMasukkan password Anda \n>> ")
     data_password[user_id] = pass_baru
     print("Password akun Anda sudah diubah!")
-
+    menu_utama(nama)
 
 def ubahemail():
     email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
@@ -307,18 +311,18 @@ def ubahemail():
             email_baru = input("\nMasukkan email Google Anda \n>> ")
     data_email[user_id] = email_baru
     print("Email akun Anda sudah diubah!")
-
+    menu_utama(nama)
 
 def hapusakun():
-        data_email.pop(user_id)
-        data_password.pop(user_id)
-        data_nama.pop(user_id)
-        data_namalengkap.pop(user_id)
-        data_notelpon.pop(user_id)
-        data_kodeunik.pop(user_id)
-        data_riwayat.pop(user_id)
-        print("Akun Anda sudah dihapus!")
-        menu_utama(nama)
+    data_email.pop(user_id)
+    data_password.pop(user_id)
+    data_nama.pop(user_id)
+    data_namalengkap.pop(user_id)
+    data_notelpon.pop(user_id)
+    data_kodeunik.pop(user_id)
+    data_riwayat.pop(user_id)
+    print("Akun Anda sudah dihapus!")
+    menu_awal()
 
 
 def akun():
