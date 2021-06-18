@@ -1,4 +1,3 @@
-# Variabel Global
 ## Variabel Menu Awal
 data_nama = ["Test Login"]
 data_email = ["testlogin@gmail.com"]
@@ -152,7 +151,7 @@ def riwayat():
     print(f"Total harga: {total}")
     menu_utama(nama)
 
-
+# Membership
 def daftar_member():
     print("Silakan masukkan data diri Anda!")
     nama_member = input("Nama Lengkap:\n>> ")
@@ -169,7 +168,7 @@ def daftar_member():
 
 
 def cek_member():
-    cek_kode = int(input("Masukkan kode unik membership Anda:\n>> ")
+    cek_kode = int(input("Masukkan kode unik membership Anda:\n>> "))
     validasi = False
     while not validasi:
         for i in range(len(data_kodeunik)):
@@ -219,7 +218,7 @@ def member():
         elif iniitu == "N":
             menu_utama(nama)
 
-
+# Transaksi
 def billing():
     print("Silakan pilih paket yang Anda inginkan")
     print("1. Standar (Rp4000/jam)")
@@ -285,9 +284,8 @@ def inifnb():
         else:
             print("Input salah.")
             menu_utama(nama)
-    break
 
-
+# Pengaturan Akun
 def ubahpass():
     pass_lama = input("Masukkan Password Lama Akun Anda\n>> ")
     if pass_lama in data_password:
