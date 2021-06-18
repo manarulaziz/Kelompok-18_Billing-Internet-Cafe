@@ -5,12 +5,11 @@ data_email = ["testlogin@gmail.com"]
 data_password = ["test12345"]
 data_riwayat = [[]]
 user_id = 0
+nama = None
 ## Variabel Membership
 data_namalengkap = ["Aji Manarul"]
 data_notelpon = ["08123456789"]
-data_kodeunik = ["12345"]
-## Variabel Loop
-keluar = False
+data_kodeunik = [12345]
 
 fnb = [
     ["Roti",5000],
@@ -24,11 +23,89 @@ fnb = [
 ]
 
 
+def run():
+    print("===== Internet Billing Cafe =====")
+    print()
+    menu_awal()
+
+
 # Menu Awal
 def menu_awal():
+    print('------------------------------')
     print("[1] Login")
     print("[2] Daftar")
-    print("[3] Keluar")
+    print("[3] Keluar Program")
+    pilih1 = int(input("Silakan pilih\n>> "))
+    if pilih1 == 1:
+        nama = masuk()
+        menu_utama(nama)
+    elif pilih1 == 2:
+        daftar()
+    elif pilih1 == 3:
+        keluar()
+    else:
+        print("Maaf pilihan yang dimasukkan tidak terdaftar")
+        print("Coba lagi [Y/N] ?")
+        coba = input().upper()
+        if coba == "Y":
+            menu_awal()
+        else:
+            keluar()
+
+
+def masuk():
+    print("---------- Login ----------")
+    print("\nSilakan Masukkan Akun Anda yang telah terdaftar ")
+
+    email_login = input("Email: ")
+    password_login = input("Password: ")
+
+    validasi = False
+    while not validasi:
+        for i in range(len(data_email)):
+            if (email_login == data_email[i]) and (password_login == data_password[i]):
+                validasi = True
+                print("Login berhasil! \n")
+                user_id = i
+                return data_nama[i]
+        if validasi:
+            break
+        else:
+            print("Email atau Password salah!")
+            email_login = input("Email: ")
+            password_login = input("Password: ")
+
+
+def menu_utama(name):
+    print("===== Selamat Datang", name, " =====")
+    print("---------- MENU ----------")
+    print("[1] Membership")
+    print("[2] Transaksi")
+    print("[3] Pengaturan Akun")
+    print("[4] Keluar")
+
+    pilih2 = int(input("Silakan pilih\n>> "))
+    if pilih2 == 1:
+        member()
+        # print('Membership')
+    elif pilih2 == 2:
+        transaksi()
+        # print('Transaksi')
+    elif pilih2 == 3:
+        akun()
+        # print('Pengaturan Akun')
+    elif pilih2 == 4:
+        menu_awal()
+        # print('Keluar')
+    else:
+        print("Maaf pilihan yang dimasukkan tidak terdaftar")
+        print("Coba lagi [Y/N] ?")
+        coba = input().upper()
+        if coba == "Y":
+            menu_utama(name)
+        else:
+            menu_awal()
+
 
 # Menu Registrasi
 def daftar():
@@ -58,6 +135,13 @@ def daftar():
     print("Terima kasih, Data Anda Sudah Terdaftar")
     print("Silakan Login di Menu Awal")
     menu_awal()
+
+def keluar():
+    print("===========================================")
+    print("Terima kasih telah menggunakan program ini!")
+    print("===========================================")
+    exit()
+
 
 # Menu Login
 def masuk():
