@@ -322,32 +322,28 @@ def transaksi():
             menu_utama()
 
 
-def akun():
+def ubahpass():
+    pass_lama = input("Masukkan Password Lama Akun Anda\n>> ")
+    if pass_lama in data_password:
+        pass_baru = input("Masukkan Password Baru\n>> ")
+        while not (len(pass_baru) >= 8 and pass_baru.isalnum()):
+            print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
+            pass_baru = input("\nMasukkan password Anda \n>> ")
+    data_password[user_id] = pass_baru
+    print("Password akun Anda sudah diubah!")
 
-    def ubahpass():
-        pass_lama = input("Masukkan Password Lama Akun Anda\n>> ")
-        if pass_lama in data_password:
-            pass_baru = input("Masukkan Password Baru\n>> ")
-            while not (len(pass_baru) >= 8 and pass_baru.isalnum()):
-                print("Masukkan password dengan minimal 8 karakter dengan kombinasi angka dan huruf")
-                pass_baru = input("\nMasukkan password Anda \n>> ")
-        data_password[user_id] = pass_baru
-        print("Password akun Anda sudah diubah!")
-        # masih bellum ada keterangan untuk balik ke menu utama
+def ubahemail():
+    email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
+    if email_lama in data_email:
+        email_baru = input("Masukkan Email Baru\n>> ")
+        harus_ada1 = "@gmail.com"
+        while not (harus_ada1 in email_baru):
+            print("Masukkan email Google yang benar!")
+            email_baru = input("\nMasukkan email Google Anda \n>> ")
+    data_email[user_id] = email_baru
+    print("Email akun Anda sudah diubah!")
 
-    def ubahemail():
-        email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
-        if email_lama in data_email:
-            email_baru = input("Masukkan Email Baru\n>> ")
-            harus_ada1 = "@gmail.com"
-            while not (harus_ada1 in email_baru):
-                print("Masukkan email Google yang benar!")
-                email_baru = input("\nMasukkan email Google Anda \n>> ")
-        data_email[user_id] = email_baru
-        print("Email akun Anda sudah diubah!")
-        # masih bellum ada keterangan untuk balik ke menu utama
-
-    def hapusakun():
+def hapusakun():
         data_email.pop(user_id)
         data_password.pop(user_id)
         data_nama.pop(user_id)
@@ -355,8 +351,10 @@ def akun():
         data_notelpon.pop(user_id)
         data_kodeunik.pop(user_id)
         data_riwayat.pop(user_id)
-        # masih belum ada keterangan hapus akun dari programnya jadi langsung ke menu utama lagi
+        print("Akun Anda sudah dihapus!")
+        menu_utama(nama)
 
+def akun():
     print("---------- PENGATURAN AKUN ----------")
     print("[1] Ubah Kata Sandi")
     print("[2] Ubah Email")
@@ -373,59 +371,3 @@ def akun():
             hapusakun()
         elif pilih4 == 4:
             menu_utama(nama)
-
-# Perintah Run
-print("===== Internet Billing Cafe =====")
-print()
-menu_awal()
-
-while 1:
-    pilih1 = int(input("Silakan pilih\n>> "))
-
-    if pilih1 == 1:
-        nama = masuk()
-        break
-    elif pilih1 == 2:
-        daftar()
-    elif pilih1 == 3:
-        print("\n"*100)
-        keluar = True
-        break
-    else:
-        print("Maaf pilihan yang dimasukkan tidak terdaftar")
-        print("Coba lagi [Y/N] ?")
-        coba = input().upper()
-        if coba == "Y":
-            menu_awal()
-        else:
-            print("\n")*100
-            break
-
-if keluar:
-    print("Terima kasih telah menggunakan program ini!")
-
-else:
-    print("===== Internet Billing Cafe =====")
-    print()
-    menu_utama(nama)
-
-    while 2:
-        pilih2 = int(input("Silakan pilih\n>> "))
-
-        if pilih2 == 1:
-            member()
-        elif pilih2 == 2:
-            transaksi()
-        elif pilih2 == 3:
-            akun()
-        elif pilih2 == 4:
-            menu_awal()
-        elif pilih2 == 5:
-            print("Maaf pilihan yang dimasukkan tidak terdaftar")
-            print("Coba lagi [Y/N] ?")
-            coba = input().upper()
-            if coba == "Y":
-                menu_utama()
-            else:
-                print("\n")*100
-                break
