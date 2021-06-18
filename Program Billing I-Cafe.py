@@ -86,16 +86,12 @@ def menu_utama(name):
     pilih2 = int(input("Silakan pilih\n>> "))
     if pilih2 == 1:
         member()
-        # print('Membership')
     elif pilih2 == 2:
         transaksi()
-        # print('Transaksi')
     elif pilih2 == 3:
         akun()
-        # print('Pengaturan Akun')
     elif pilih2 == 4:
         menu_awal()
-        # print('Keluar')
     else:
         print("Maaf pilihan yang dimasukkan tidak terdaftar")
         print("Coba lagi [Y/N] ?")
@@ -282,7 +278,6 @@ def inifnb():
 
             break
         elif pilihan == 'N':
-            # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
             print(riwayat())
             menu_utama(nama)
         else:
