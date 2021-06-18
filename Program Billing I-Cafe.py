@@ -143,94 +143,64 @@ def keluar():
     exit()
 
 
-# Menu Login
-def masuk():
-    print("---------- Login ----------")
-    print("\nSilakan Masukkan Akun Anda yang telah terdaftar ")
-    
-    email_login = input("Email: ")
-    
-    password_login = input("Password: ")
+def riwayat():
+    total = 0
+    for i in range(len(data_riwayat[user_id])):
+        print("[{}] {:<9s} : Rp{},00".format(i + 1, data_riwayat[user_id][i][0], data_riwayat[user_id][i][1]))
+        total += data_riwayat[user_id][i][1]
+
+    print(f"Total harga: {total}")
+    menu_utama(nama)
+
+
+def daftar_member():
+    print("Silakan masukkan data diri Anda!")
+    nama_member = input("Nama Lengkap:\n>> ")
+    data_namalengkap[user_id] = nama_member
+
+    notelpon = int(input("Nomor Telepon:\n>> "))
+    data_notelpon[user_id] = notelpon
+
+    kode_unik = int(input("Kode Unik:\n>> "))
+    data_kodeunik[user_id] = kode_unik
+    print("\n Pendaftaran Member berhasil! \n")
+    data_riwayat[user_id].append(["Pendaftaran Member", 30000])
+    menu_utama(nama)
+
+
+def cek_member():
+    cek_kode = int(input("Masukkan kode unik membership Anda:\n>> ")
     validasi = False
     while not validasi:
-        for i in range(len(data_email)):
-            if (email_login == data_email[i]) and (password_login == data_password[i]):
+        for i in range(len(data_kodeunik)):
+            if (cek_kode == data_kodeunik[i]):
                 validasi = True
-                print("Login berhasil! \n")
-                user_id = i
-                return data_nama[i]
+                print("Anda Mempunyai Membership!\n")
+                print("----- Membership Menu ------")
+                print("[1.] Cek Riwayat Transaksi")
+                print("[2.] Kembali")
+                riwayat_transaksi = int(input("Pilih Menu\n>> "))
+                if riwayat_transaksi == 1:
+                    riwayat()
+                elif riwayat_transaksi == 2:
+                    menu_utama(nama)
+        
         if validasi:
             break
         else:
-            print("Email atau Password salah!")
-            email_login = input("Email: ")
-            password_login = input("Password: ")
-
-# Menu Utama setelah Login
-def menu_utama(name):
-    print("===== Selamat Datang", nama, " =====")
-    print("---------- MENU ----------")
-    print("[1] Membership")
-    print("[2] Transaksi")
-    print("[3] Pengaturan Akun")
-    print("[4] Keluar")
-
-# Menu Membership
-def member():
-
-    def riwayat():
-        total = 0
-        for i in range(len(data_riwayat[user_id])):
-            print("[{}] {:<9s} : Rp{},00".format(i+1, data_riwayat[user_id][i][0], data_riwayat[user_id][i][1]))
-            total += data_riwayat[user_id][i][1]
-
-        print(f"Total harga: {total}")
-        # masih belum ada fungsi untuk balik ke menu utama secara baik
-    
-    def daftar_member():
-        print("Silakan masukkan data diri Anda!")
-        nama_member = input("Nama Lengkap:\n>> ")
-        data_namalengkap[user_id](nama_member) # masih error
-
-        notelpon = int(input("Nomor Telepon:\n>> "))
-        data_notelpon[user_id](notelpon) # masih error
-
-        kode_unik = int(input("Kode Unik:\n>> "))
-        data_kodeunik[user_id](kode_unik) # masih error
-
-
-    def cek_member():
-        cek_kode = input("Masukkan kode unik membership Anda:\n>> ")
-        validasi = False
-        while not validasi:
-            for i in range(len(data_kodeunik)):
-                if (cek_kode == data_kodeunik[i]):
-                    validasi = True
-                    print("Anda Mempunyai Membership!\n")
-                    print("----- Membership Menu ------")
-                    print("[1.] Cek Riwayat Transaksi")
-                    print("[2.] Kembali")
-                    riwayat_transaksi = int(input("Pilih Menu\n>> "))
-                    if riwayat_transaksi == 1:
-                        riwayat()
-                    elif riwayat_transaksi == 2:
-                        menu_utama(nama)
-        
-            if validasi:
-                break
-            else:
-                print("Kode Unik salah!")
-                cek_kode = input("Kode Unik:\n>> ")
+            print("Kode Unik salah!")
+            cek_kode = input("Kode Unik:\n>> ")
                 
-                print("\nAtau apakah Anda belum mendaftar sebagai member?")
-                choice = input("Anda ingin mendaftar menjadi member? [Y/N]")
-                print("Pendaftaran member dikenakan biaya Rp30.000")
-                if choice == "Y":
-                    daftar_member()
-                else:
-                    menu_utama(nama)
+            print("\nAtau apakah Anda belum mendaftar sebagai member?")
+            choice = input("Anda ingin mendaftar menjadi member? [Y/N]").upper()
+            print("Pendaftaran member dikenakan biaya Rp30.000")
+            if choice == "Y":
+                daftar_member()
+            else:
+                menu_utama(nama)
 
 
+def member():
     print("Apakah Anda mempunyai Membership? [Y/N]")
     itu = input().upper()
     if itu == "Y":
@@ -239,7 +209,7 @@ def member():
         if ini == "Y":
             cek_member()
         elif ini == "N":
-            menu_utama(nama)  
+            menu_utama(nama)
     elif itu == "N":
         print("Apakah Anda ingin mendaftar Membership? [Y/N]")
         print("Pendaftaran member dikenakan biaya Rp30.000")
@@ -250,76 +220,72 @@ def member():
             menu_utama(nama)
 
 
+def billing():
+    print("Silakan pilih paket yang Anda inginkan")
+    print("1. Standar (Rp4000/jam)")
+    print("2. VIP (Rp6000/jam)")
+    print("3. VVIP (Rp9000/jam)")
+    print("4. Kembali")
+
+
+def transaksi():
+    billing()
+    pilih3 = int(input("Silakan pilih\n>> "))
+    if pilih3 == 1:
+        standar = 4000
+        durasi = int(input("Input durasi (jam): "))
+        net = durasi * standar
+        data_riwayat[user_id].append(["Standar", net])
+        inifnb()
+    elif pilih3 == 2:
+        vip = 6000
+        durasi = int(input("Input durasi (jam): "))
+        net = durasi * vip
+        data_riwayat[user_id].append(["VIP", net])
+        inifnb()
+    elif pilih3 == 3:
+        vvip = 9000
+        durasi = int(input("Input durasi (jam): "))
+        net = durasi * vvip
+        data_riwayat[user_id].append(["VVIP", net])
+        inifnb()
+    elif pilih3 == 4:
+        menu_utama(nama)
+    else:
+        transaksi()
+
+
 def inifnb():
     while True:
-        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [y/n] ")
-        if pilihan == 'y':
-            isPesan = 'y'
+        pilihan = input("Apakah anda ingin memesan makanan/minuman ? [Y/N] ").upper()
+        if pilihan == 'Y':
+            isPesan = 'Y'
             while True:
-                if isPesan == 'y':
+                if isPesan == 'Y':
                     print("Daftar Harga")
                     for i, j in enumerate(fnb):
                         print("[{}] {:<9s} : Rp{},00".format(i, j[0], j[1]))
 
                     input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
-                    while (input_menu < 1 or input_menu > 8):
+                    while (input_menu < 0 or input_menu > 7):
                         print("Input tidak valid")
                         input_menu = int(input("Silahkan pilih menu makanan atau minuman:"))
 
                     data_riwayat[user_id].append([fnb[input_menu][0], fnb[input_menu][1]])
                     isPesan = input("Apakah anda ingin memesan makanan/minuman yang lain? [y/n] ")
-                    # masih error saat memilih menu yang nomor 8
                 elif isPesan == 'n':
                     break
                 else:
                     print("Input tidak valid.")
 
             break
-        elif pilihan == 'n':
-            # masih ada banyak tambahan harusnya misal total harga dan keterangan lainnya
-            break
+        elif pilihan == 'N':
+            print(riwayat())
+            menu_utama(nama)
         else:
             print("Input salah.")
-            break
-
-
-# Menu Transaksi
-def transaksi():
-    def billing():
-        print("Silakan pilih paket yang Anda inginkan\n>>")
-        print("1. Standar (Rp4000/jam)")
-        print("2. VIP (Rp6000/jam)")
-        print("3. VVIP (Rp9000/jam)")
-        print("4. Kembali")
-
-    print
-    billing()
-    while 3:
-        pilih3 = int(input("Silakan pilih\n>> "))
-
-        if pilih3 == 1:
-            standar = 4000
-            durasi = int(input("Input durasi (jam): "))
-            net = durasi * standar
-            data_riwayat[user_id].append(["Standar", net])
-            inifnb()
-            break
-        elif pilih3 == 2:
-            vip = 6000
-            durasi = int(input("Input durasi (jam): "))
-            net = durasi * vip
-            data_riwayat[user_id].append(["VIP", net])
-            inifnb()
-            break
-        elif pilih3 == 3:
-            vvip = 4000
-            durasi = int(input("Input durasi (jam): "))
-            net = durasi * vvip
-            data_riwayat[user_id].append(["VVIP", net])
-            inifnb()
-            break
-        elif pilih3 == 4:
-            menu_utama()
+            menu_utama(nama)
+    break
 
 
 def ubahpass():
@@ -332,6 +298,7 @@ def ubahpass():
     data_password[user_id] = pass_baru
     print("Password akun Anda sudah diubah!")
 
+
 def ubahemail():
     email_lama = input("Masukkan Email Lama Akun Anda\n>> ")
     if email_lama in data_email:
@@ -342,6 +309,7 @@ def ubahemail():
             email_baru = input("\nMasukkan email Google Anda \n>> ")
     data_email[user_id] = email_baru
     print("Email akun Anda sudah diubah!")
+
 
 def hapusakun():
         data_email.pop(user_id)
@@ -354,12 +322,13 @@ def hapusakun():
         print("Akun Anda sudah dihapus!")
         menu_utama(nama)
 
+
 def akun():
     print("---------- PENGATURAN AKUN ----------")
     print("[1] Ubah Kata Sandi")
     print("[2] Ubah Email")
     print("[3] Hapus Akun")
-    print("[4] Keluar")
+    print("[4] Kembali")
 
     pilih4 = int(input("Silakan pilih\n>> "))
     while 4:
@@ -371,3 +340,6 @@ def akun():
             hapusakun()
         elif pilih4 == 4:
             menu_utama(nama)
+
+#----Run Program----
+run()
